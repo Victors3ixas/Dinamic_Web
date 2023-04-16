@@ -1,19 +1,18 @@
-window.onload = function() {
-    dir_list();
-}
-
 function dir_list() {
     const container = document.getElementById("container");
-    // Insira aqui o caminho do diretório que deseja listar
-    const dir = "document/";
-    fetch(dir)
+    const diretorio = "document/";
+    fetch(diretorio)
         .then(resposta => resposta.text())
         .then(texto => {
             const linhas = texto.split("\n");
+            const div = document.createElement("div");
             for (let i = 0; i < linhas.length; i++) {
-                const div = document.createElement("div");
-                div.innerHTML = linhas[i];
-                container.appendChild(div);
+                div.innerHTML += linhas[i] + "<br>";
             }
+            container.appendChild(div);
         });
+}
+
+window.onload = function() {
+    dir_list();
 }
